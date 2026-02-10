@@ -1,16 +1,16 @@
 # 🇵🇰 PakBiz Pro - Premium Enterprise Dashboard
 
+> 🌐 **LIVE DEMO:** [https://std35970-blip.github.io/pak-ecom-dashboard/](https://std35970-blip.github.io/pak-ecom-dashboard/) 👈 **Click to try it now!**
+
+---
+
 **Professional E-Commerce Management Platform for Pakistani Businesses**
 
 A complete, production-ready **Premium SaaS Dashboard** with enterprise-grade UI/UX, designed specifically for e-commerce sellers in Pakistan. Comparable to products on ThemeForest/Envato in the $49-99 range.
 
 ![PakBiz Pro](https://img.shields.io/badge/Version-2.0.0-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![Premium](https://img.shields.io/badge/Premium-Enterprise%20Grade-gold) ![Made for Pakistan](https://img.shields.io/badge/Made%20for-Pakistan-green)
 
-### 🌐 Live Demo
-
-**Try it now:** [https://std35970-blip.github.io/pak-ecom-dashboard/](https://std35970-blip.github.io/pak-ecom-dashboard/)
-
-> 🚀 **Deployed automatically via GitHub Pages** | 📖 [Premium Features Guide](PREMIUM_FEATURES.md)
+---
 
 ### 🎯 What's New in v2.0
 
@@ -310,6 +310,21 @@ This means you can:
 - ✅ Distribute and sell
 - ✅ Use privately
 - ✅ No attribution required (but appreciated!)
+
+---
+
+## 🔗 Quick Links
+
+### 🌐 Live Demo & Resources
+- **Live Dashboard**: [https://std35970-blip.github.io/pak-ecom-dashboard/](https://std35970-blip.github.io/pak-ecom-dashboard/) 
+- **Premium Features**: [PREMIUM_FEATURES.md](PREMIUM_FEATURES.md)
+- **Getting Started**: [GETTING_STARTED.md](GETTING_STARTED.md)
+- **Deployment Guide**: [DEPLOYMENT.md](DEPLOYMENT.md)
+
+### 📦 Repository
+- **GitHub**: [https://github.com/std35970-blip/pak-ecom-dashboard](https://github.com/std35970-blip/pak-ecom-dashboard)
+- **Issues**: [Report bugs or request features](https://github.com/std35970-blip/pak-ecom-dashboard/issues)
+- **Pull Requests**: [Contribute improvements](https://github.com/std35970-blip/pak-ecom-dashboard/pulls)
 
 ---
 
