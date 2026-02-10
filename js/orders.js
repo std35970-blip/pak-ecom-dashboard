@@ -9,8 +9,47 @@ function loadOrders() {
     setupOrderModal();
 }
 
-// Display orders in table
-function displayOrders(filterStatus = '', filterPayment = '', filterCourier = '') {
+// Format date
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-GB');
+}
+
+// Setup order filters
+function setupOrderFilters() {
+    const filterStatus = document.getElementById('filterStatus');
+    const filterPayment = document.getElementById('filterPayment');
+    const filterCourier = document.getElementById('filterCourier');
+    const searchOrders = document.getElementById('searchOrders');
+    
+    filterStatus.addEventListener('change', applyFilters);
+    filterPayment.addEventListener('change', applyFilters);
+    filterCourier.addEventListener('change', applyFilters);
+    
+    // Add search functionality
+    if (searchOrders) {
+        searchOrders.addEventListener('input', debounce(applyFilters, 300));
+    }
+    
+    // Setup export button
+    const exportBtn = document.getElementById('exportOrdersBtn');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', exportOrders);
+    }
+}
+
+// Apply filters
+function applyFilters() {
+    const filterStatus = document.getElementById('filterStatus').value;
+    const filterPayment = document.getElementById('filterPayment').value;
+    const filterCourier = document.getElementById('filterCourier').value;
+    const searchQuery = document.getElementById('searchOrders')?.value.toLowerCase() || '';
+    
+    displayOrders(filterStatus, filterPayment, filterCourier, searchQuery);
+}
+
+// Display orders with search
+function displayOrders(filterStatus = '', filterPayment = '', filterCourier = '', searchQuery = '') {
     const orders = getOrders();
     const tbody = document.getElementById('ordersTableBody');
     tbody.innerHTML = '';
@@ -27,6 +66,14 @@ function displayOrders(filterStatus = '', filterPayment = '', filterCourier = ''
     if (filterCourier) {
         filteredOrders = filteredOrders.filter(o => o.courier === filterCourier);
     }
+    if (searchQuery) {
+        filteredOrders = filteredOrders.filter(o => 
+            o.id.toLowerCase().includes(searchQuery) ||
+            o.customerName.toLowerCase().includes(searchQuery) ||
+            o.product.toLowerCase().includes(searchQuery) ||
+            o.phone.includes(searchQuery)
+        );
+    }
     
     // Display orders
     filteredOrders.forEach(order => {
@@ -40,45 +87,64 @@ function displayOrders(filterStatus = '', filterPayment = '', filterCourier = ''
             <td>${order.city}</td>
             <td>${order.product}</td>
             <td>${order.quantity}</td>
-            <td>${formatCurrency(totalAmount)}</td>
+            <td><strong>${formatCurrency(totalAmount)}</strong></td>
             <td>${order.payment}</td>
             <td>${order.courier}</td>
-            <td><span class="status-badge status-${order.status.toLowerCase()}">${order.status}</span></td>
+            <td>${getStatusBadge(order.status)}</td>
             <td>${formatDate(order.date)}</td>
             <td>
-                <button class="btn btn-edit" onclick="editOrder('${order.id}')">Edit</button>
-                <button class="btn btn-danger" onclick="deleteOrder('${order.id}')">Delete</button>
+                <div class="d-flex gap-sm">
+                    <button class="btn btn-icon-sm btn-secondary" onclick="editOrder('${order.id}')" title="Edit">
+                        ${Icons.edit}
+                    </button>
+                    <button class="btn btn-icon-sm btn-danger" onclick="deleteOrder('${order.id}')" title="Delete">
+                        ${Icons.trash}
+                    </button>
+                </div>
             </td>
         `;
         
         tbody.appendChild(row);
     });
-}
-
-// Format date
-function formatDate(dateStr) {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB');
-}
-
-// Setup order filters
-function setupOrderFilters() {
-    const filterStatus = document.getElementById('filterStatus');
-    const filterPayment = document.getElementById('filterPayment');
-    const filterCourier = document.getElementById('filterCourier');
     
-    filterStatus.addEventListener('change', applyFilters);
-    filterPayment.addEventListener('change', applyFilters);
-    filterCourier.addEventListener('change', applyFilters);
+    // Update pagination info
+    updateOrdersPagination(filteredOrders.length);
 }
 
-// Apply filters
-function applyFilters() {
-    const filterStatus = document.getElementById('filterStatus').value;
-    const filterPayment = document.getElementById('filterPayment').value;
-    const filterCourier = document.getElementById('filterCourier').value;
+// Export orders to CSV
+function exportOrders() {
+    const orders = getOrders();
+    const csvData = orders.map(order => ({
+        'Order ID': order.id,
+        'Customer': order.customerName,
+        'Phone': order.phone,
+        'City': order.city,
+        'Product': order.product,
+        'Quantity': order.quantity,
+        'Price': order.price,
+        'Shipping': order.shipping,
+        'Total': (order.price * order.quantity) + order.shipping,
+        'Payment': order.payment,
+        'Courier': order.courier,
+        'Status': order.status,
+        'Date': order.date
+    }));
     
-    displayOrders(filterStatus, filterPayment, filterCourier);
+    exportToCSV(csvData, 'orders-export.csv');
+    showToast('Orders exported successfully!', 'success');
+}
+
+// Update pagination info
+function updateOrdersPagination(totalOrders) {
+    const showingEl = document.getElementById('ordersShowing');
+    const totalEl = document.getElementById('ordersTotal');
+    
+    if (showingEl) {
+        showingEl.textContent = `1-${Math.min(10, totalOrders)}`;
+    }
+    if (totalEl) {
+        totalEl.textContent = totalOrders;
+    }
 }
 
 // Setup order modal
