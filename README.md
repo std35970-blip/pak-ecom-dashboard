@@ -6,6 +6,12 @@ A complete, production-ready SaaS Dashboard designed specifically for small-to-m
 
 ![PakBiz Dashboard](https://img.shields.io/badge/Version-1.0.0-green) ![License](https://img.shields.io/badge/License-MIT-blue) ![Made for Pakistan](https://img.shields.io/badge/Made%20for-Pakistan-green)
 
+### 🌐 Live Demo
+
+**Try it now:** [https://std35970-blip.github.io/pak-ecom-dashboard/](https://std35970-blip.github.io/pak-ecom-dashboard/)
+
+> 🚀 **Deployed automatically via GitHub Pages** | 📖 [Deployment Guide](DEPLOYMENT.md)
+
 ---
 
 ## ⚡ Quick Start - How to Open This
@@ -158,28 +164,28 @@ pak-ecom-dashboard/
 
 ---
 
-## 🌐 Deployment Options
+## 🌐 Deployment
 
-### Option 1: GitHub Pages (Free)
-1. Create a GitHub repository
-2. Upload all files
-3. Go to Settings > Pages
-4. Select main branch and save
-5. Your dashboard will be live at `https://yourusername.github.io/repository-name`
+### 🎉 Already Deployed!
 
-### Option 2: Netlify (Free)
-1. Create account at [netlify.com](https://netlify.com)
-2. Drag and drop your project folder
-3. Get instant deployment with custom domain support
+**Live Site:** [https://std35970-blip.github.io/pak-ecom-dashboard/](https://std35970-blip.github.io/pak-ecom-dashboard/)
 
-### Option 3: Vercel (Free)
-1. Create account at [vercel.com](https://vercel.com)
-2. Import your GitHub repository or upload files
-3. Deploy with one click
+The dashboard is automatically deployed to **GitHub Pages** and updates whenever changes are pushed to the repository.
 
-### Option 4: Local Hosting
-- Simply open `index.html` in any web browser
-- Can be shared via USB, email, or cloud storage
+> 📚 **Want to deploy your own copy?** See the complete [DEPLOYMENT.md](DEPLOYMENT.md) guide for step-by-step instructions.
+
+### Quick Deployment Options
+
+**GitHub Pages (Current):**
+- ✅ Automatically deployed via GitHub Actions
+- ✅ Free hosting with HTTPS
+- ✅ Updates automatically on every push
+- ✅ Accessible at `https://std35970-blip.github.io/pak-ecom-dashboard/`
+
+**Other Options:**
+- **Netlify**: Drag & drop deployment in 2 minutes ([netlify.com](https://netlify.com))
+- **Vercel**: One-click deployment ([vercel.com](https://vercel.com))
+- **Local**: Just open `index.html` in any browser
 
 ---
 
