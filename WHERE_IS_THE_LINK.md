@@ -4,7 +4,30 @@
 
 # 🌐 [https://std35970-blip.github.io/pak-ecom-dashboard/](https://std35970-blip.github.io/pak-ecom-dashboard/)
 
-**👆 Click to view the live premium dashboard!**
+**👆 Click to view the live dashboard!**
+
+## ⚠️ IMPORTANT: About the Live Link
+
+### What You'll See Currently
+
+**The live link shows the OLD version (basic UI)** because the premium updates haven't been deployed yet.
+
+- **Premium version**: ✅ Ready on `copilot/complete-task` branch (this branch)
+- **Live site**: ❌ Still shows old version from `main` branch
+- **Why**: GitHub Pages deploys from `main`, premium updates not merged yet
+
+### How to See the Premium Version
+
+**Option 1 - See it NOW (Locally):**
+- Just open `index.html` in your browser
+- You already have all the premium files!
+
+**Option 2 - See it on Live Site (After Deployment):**
+- Merge this PR to `main` branch
+- Wait 2-3 minutes for automatic deployment
+- Then the live link will show the premium version
+
+📖 **Read more**: [HOW_TO_SEE_PREMIUM.md](HOW_TO_SEE_PREMIUM.md) | [DEPLOYMENT_ISSUE.md](DEPLOYMENT_ISSUE.md)
 
 ---
 

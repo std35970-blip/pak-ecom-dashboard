@@ -2,6 +2,9 @@
 
 > 🌐 **LIVE DEMO:** [https://std35970-blip.github.io/pak-ecom-dashboard/](https://std35970-blip.github.io/pak-ecom-dashboard/) 👈 **Click to try it now!**
 
+> ⚠️ **NOTE**: The live link currently shows the OLD version. The premium updates are ready but need to be deployed to `main` branch.  
+> 📖 **See**: [HOW_TO_SEE_PREMIUM.md](HOW_TO_SEE_PREMIUM.md) for details.
+
 ---
 
 **Professional E-Commerce Management Platform for Pakistani Businesses**
