@@ -12,13 +12,16 @@ All deployment files have been created and committed. Here's what happens next:
 ✅ **Deployment Documentation** - Complete guide in DEPLOYMENT.md  
 ✅ **README Updated** - Live site link added  
 ✅ **All Files Committed** - Ready to deploy
+✅ **Fixed:** Workflow now deploys only from `main` branch
 
 ---
 
 ## 🚀 How to Complete the Deployment
 
-### Step 1: Merge the Pull Request
-This branch (`copilot/build-saas-dashboard`) needs to be merged to trigger deployment.
+### Step 1: Merge to Main Branch
+**Important:** This PR must be merged to `main` branch first!
+- GitHub Pages only deploys from `main` branch for security
+- Feature branches cannot deploy to production
 
 ### Step 2: Enable GitHub Pages
 1. Go to your repository on GitHub
@@ -27,11 +30,19 @@ This branch (`copilot/build-saas-dashboard`) needs to be merged to trigger deplo
    - **Source:** Select "GitHub Actions"
 4. Save the settings
 
-### Step 3: Watch the Deployment
-1. Go to the **Actions** tab in your repository
-2. You'll see the "Deploy to GitHub Pages" workflow running
+### Step 3: Automatic Deployment
+Once merged to `main`:
+1. GitHub Actions will automatically trigger
+2. The "Deploy to GitHub Pages" workflow will run
 3. Wait 2-3 minutes for it to complete
 4. Look for the green checkmark ✅
+
+**Or manually trigger:**
+1. Go to the **Actions** tab in your repository
+2. Click "Deploy to GitHub Pages" workflow
+3. Click "Run workflow" button
+4. Select branch: **main** (not feature branches!)
+5. Click "Run workflow"
 
 ### Step 4: Access Your Live Site
 Once deployed, visit:

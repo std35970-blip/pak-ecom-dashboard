@@ -4,22 +4,23 @@
 
 ### Option 1: Enable GitHub Pages (Recommended - Takes 2 minutes)
 
-1. **Go to Settings:**
+1. **Merge to Main Branch:**
+   - This PR needs to be merged to `main` branch first
+   - GitHub Pages only deploys from `main` branch for security
+
+2. **Go to Settings:**
    - Visit: https://github.com/std35970-blip/pak-ecom-dashboard/settings/pages
 
-2. **Configure Source:**
+3. **Configure Source:**
    - Under "Build and deployment"
    - Set **Source** to: `GitHub Actions`
    - Click **Save**
 
-3. **Trigger Deployment:**
-   - Go to: https://github.com/std35970-blip/pak-ecom-dashboard/actions
-   - Click "Deploy to GitHub Pages" workflow
-   - Click "Run workflow" button (top right)
-   - Select branch: `copilot/build-saas-dashboard`
-   - Click "Run workflow"
+4. **Automatic Deployment:**
+   - Once merged to `main`, deployment happens automatically!
+   - Or manually trigger: Go to Actions → "Deploy to GitHub Pages" → "Run workflow" → Select `main` branch
 
-4. **Access Your Live Site:**
+5. **Access Your Live Site:**
    - Wait 2-3 minutes
    - Visit: **https://std35970-blip.github.io/pak-ecom-dashboard/**
    - Done! 🎉
