@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PakBiz Dashboard - E-Commerce Management Tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>🇵🇰 PakBiz</h2>
+            <button class="close-btn" id="closeSidebar">✕</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="#orders" class="nav-item" data-page="orders">
+                <span class="nav-icon">📦</span>
+                <span class="nav-text">Orders</span>
+            </a>
+            <a href="#calculator" class="nav-item" data-page="calculator">
+                <span class="nav-icon">💰</span>
+                <span class="nav-text">Profit Calculator</span>
+            </a>
+            <a href="#payments" class="nav-item" data-page="payments">
+                <span class="nav-icon">🏦</span>
+                <span class="nav-text">Payments</span>
+            </a>
+            <a href="#products" class="nav-item" data-page="products">
+                <span class="nav-icon">📈</span>
+                <span class="nav-text">Products</span>
+            </a>
+            <a href="#courier" class="nav-item" data-page="courier">
+                <span class="nav-icon">🚚</span>
+                <span class="nav-text">Courier Analytics</span>
+            </a>
+            <a href="#settings" class="nav-item" data-page="settings">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Settings</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <button class="hamburger" id="hamburger">☰</button>
+            <div class="header-info">
+                <span id="currentDate"></span>
+            </div>
+        </header>
+
+        <!-- Dashboard Page -->
+        <div class="page active" id="dashboard-page">
+            <div class="page-header">
+                <h1 id="greeting"></h1>
+                <p class="subtitle">Welcome to your E-Commerce Dashboard</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💵</div>
+                    <div class="stat-info">
+                        <h3>Today's Sales</h3>
+                        <p class="stat-value" id="todaySales">₨0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-info">
+                        <h3>This Week</h3>
+                        <p class="stat-value" id="weekSales">₨0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📆</div>
+                    <div class="stat-info">
+                        <h3>This Month</h3>
+                        <p class="stat-value" id="monthSales">₨0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-info">
+                        <h3>Total Profit</h3>
+                        <p class="stat-value" id="totalProfit">₨0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="chart-card">
+                    <h3>Last 7 Days Revenue</h3>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="summary-card">
+                    <h3>Summary</h3>
+                    <div class="summary-item">
+                        <span>Total Orders</span>
+                        <span class="summary-value" id="totalOrders">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Total Revenue</span>
+                        <span class="summary-value" id="totalRevenue">₨0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Return Rate</span>
+                        <span class="summary-value" id="returnRate">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders Page -->
+        <div class="page" id="orders-page">
+            <div class="page-header">
+                <h1>Order Management</h1>
+                <button class="btn btn-primary" id="addOrderBtn">+ Add Order</button>
+            </div>
+
+            <div class="filters">
+                <select id="filterStatus">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Returned">Returned</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+                <select id="filterPayment">
+                    <option value="">All Payment Methods</option>
+                    <option value="COD">COD</option>
+                    <option value="JazzCash">JazzCash</option>
+                    <option value="Easypaisa">Easypaisa</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                    <option value="Prepaid">Prepaid</option>
+                </select>
+                <select id="filterCourier">
+                    <option value="">All Couriers</option>
+                    <option value="TCS">TCS</option>
+                    <option value="Leopards">Leopards</option>
+                    <option value="PostEx">PostEx</option>
+                    <option value="M&P">M&P</option>
+                    <option value="Trax">Trax</option>
+                    <option value="CallCourier">CallCourier</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="table-container">
+                <table class="orders-table" id="ordersTable">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Phone</th>
+                            <th>City</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Amount</th>
+                            <th>Payment</th>
+                            <th>Courier</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Calculator Page -->
+        <div class="page" id="calculator-page">
+            <div class="page-header">
+                <h1>Profit Calculator</h1>
+                <p class="subtitle">Calculate your net profit per item</p>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label>Product Cost (₨)</label>
+                        <input type="number" id="calcProductCost" placeholder="Enter product cost">
+                    </div>
+                    <div class="form-group">
+                        <label>Selling Price (₨)</label>
+                        <input type="number" id="calcSellingPrice" placeholder="Enter selling price">
+                    </div>
+                    <div class="form-group">
+                        <label>Shipping Cost (₨)</label>
+                        <input type="number" id="calcShippingCost" value="150">
+                    </div>
+                    <div class="form-group">
+                        <label>COD Charges (₨)</label>
+                        <input type="number" id="calcCodCharges" value="50">
+                    </div>
+                    <div class="form-group">
+                        <label>Packaging Cost (₨)</label>
+                        <input type="number" id="calcPackagingCost" value="30">
+                    </div>
+                    <div class="form-group">
+                        <label>Platform Fee (%)</label>
+                        <input type="number" id="calcPlatformFee" value="0" step="0.1">
+                    </div>
+                    <button class="btn btn-primary" id="calculateBtn">Calculate Profit</button>
+                </div>
+
+                <div class="calculator-result" id="calculatorResult">
+                    <h3>Profit Analysis</h3>
+                    <div class="result-item">
+                        <span>Total Cost:</span>
+                        <span id="resultTotalCost">₨0</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Revenue:</span>
+                        <span id="resultRevenue">₨0</span>
+                    </div>
+                    <div class="result-item large">
+                        <span>Net Profit:</span>
+                        <span id="resultNetProfit" class="profit-value">₨0</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Profit Margin:</span>
+                        <span id="resultProfitMargin">0%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payments Page -->
+        <div class="page" id="payments-page">
+            <div class="page-header">
+                <h1>Payment Tracking</h1>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💵</div>
+                    <div class="stat-info">
+                        <h3>COD</h3>
+                        <p class="stat-value" id="codTotal">₨0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📱</div>
+                    <div class="stat-info">
+                        <h3>JazzCash</h3>
+                        <p class="stat-value" id="jazzcashTotal">₨0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💳</div>
+                    <div class="stat-info">
+                        <h3>Easypaisa</h3>
+                        <p class="stat-value" id="easypaisaTotal">₨0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏦</div>
+                    <div class="stat-info">
+                        <h3>Bank Transfer</h3>
+                        <p class="stat-value" id="bankTotal">₨0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <h3>Prepaid</h3>
+                        <p class="stat-value" id="prepaidTotal">₨0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="chart-card">
+                    <h3>Payment Methods Breakdown</h3>
+                    <canvas id="paymentChart"></canvas>
+                </div>
+                <div class="summary-card">
+                    <h3>Payment Status</h3>
+                    <div class="summary-item">
+                        <span>Total Received</span>
+                        <span class="summary-value" id="totalReceived">₨0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Pending Payments</span>
+                        <span class="summary-value" id="pendingPayments">₨0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Page -->
+        <div class="page" id="products-page">
+            <div class="page-header">
+                <h1>Product Performance</h1>
+                <button class="btn btn-primary" id="addProductBtn">+ Add Product</button>
+            </div>
+
+            <div class="table-container">
+                <table class="products-table" id="productsTable">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Units Sold</th>
+                            <th>Total Revenue</th>
+                            <th>Return Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Courier Page -->
+        <div class="page" id="courier-page">
+            <div class="page-header">
+                <h1>Courier Analytics</h1>
+            </div>
+
+            <div class="stats-grid" id="courierStats">
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="chart-card">
+                    <h3>Courier Distribution</h3>
+                    <canvas id="courierChart"></canvas>
+                </div>
+                <div class="summary-card">
+                    <h3>Courier Performance</h3>
+                    <div id="courierPerformance"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div class="page" id="settings-page">
+            <div class="page-header">
+                <h1>Settings</h1>
+            </div>
+
+            <div class="settings-container">
+                <h3>Business Information</h3>
+                <div class="form-group">
+                    <label>Business Name</label>
+                    <input type="text" id="settingBusinessName" placeholder="Enter business name">
+                </div>
+                <div class="form-group">
+                    <label>Owner Name</label>
+                    <input type="text" id="settingOwnerName" placeholder="Enter owner name">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" id="settingPhone" placeholder="+92 XXX XXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <select id="settingCity">
+                        <option value="Karachi">Karachi</option>
+                        <option value="Lahore">Lahore</option>
+                        <option value="Islamabad">Islamabad</option>
+                        <option value="Rawalpindi">Rawalpindi</option>
+                        <option value="Faisalabad">Faisalabad</option>
+                        <option value="Multan">Multan</option>
+                        <option value="Peshawar">Peshawar</option>
+                        <option value="Quetta">Quetta</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Sialkot">Sialkot</option>
+                    </select>
+                </div>
+
+                <h3>Defaults</h3>
+                <div class="form-group">
+                    <label>Default Courier</label>
+                    <select id="settingDefaultCourier">
+                        <option value="TCS">TCS</option>
+                        <option value="Leopards">Leopards</option>
+                        <option value="PostEx">PostEx</option>
+                        <option value="M&P">M&P</option>
+                        <option value="Trax">Trax</option>
+                        <option value="CallCourier">CallCourier</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Default Payment Method</label>
+                    <select id="settingDefaultPayment">
+                        <option value="COD">COD</option>
+                        <option value="JazzCash">JazzCash</option>
+                        <option value="Easypaisa">Easypaisa</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Prepaid">Prepaid</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Currency</label>
+                    <input type="text" value="PKR (₨)" disabled>
+                </div>
+
+                <button class="btn btn-primary" id="saveSettingsBtn">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Order Modal -->
+    <div class="modal" id="addOrderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Order</h2>
+                <button class="close-modal" id="closeModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Customer Name</label>
+                    <input type="text" id="orderCustomerName" required>
+                </div>
+                <div class="form-group">
+                    <label>Customer Phone</label>
+                    <input type="text" id="orderCustomerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>City</label>
+                    <select id="orderCity" required>
+                        <option value="Karachi">Karachi</option>
+                        <option value="Lahore">Lahore</option>
+                        <option value="Islamabad">Islamabad</option>
+                        <option value="Rawalpindi">Rawalpindi</option>
+                        <option value="Faisalabad">Faisalabad</option>
+                        <option value="Multan">Multan</option>
+                        <option value="Peshawar">Peshawar</option>
+                        <option value="Quetta">Quetta</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Sialkot">Sialkot</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" id="orderProductName" required>
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" id="orderQuantity" value="1" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Product Price (₨)</label>
+                    <input type="number" id="orderPrice" required>
+                </div>
+                <div class="form-group">
+                    <label>Shipping Cost (₨)</label>
+                    <input type="number" id="orderShipping" value="150" required>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="orderPayment" required>
+                        <option value="COD">COD</option>
+                        <option value="JazzCash">JazzCash</option>
+                        <option value="Easypaisa">Easypaisa</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Prepaid">Prepaid</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Courier</label>
+                    <select id="orderCourier" required>
+                        <option value="TCS">TCS</option>
+                        <option value="Leopards">Leopards</option>
+                        <option value="PostEx">PostEx</option>
+                        <option value="M&P">M&P</option>
+                        <option value="Trax">Trax</option>
+                        <option value="CallCourier">CallCourier</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Order Status</label>
+                    <select id="orderStatus" required>
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Shipped">Shipped</option>
+                        <option value="Delivered">Delivered</option>
+                        <option value="Returned">Returned</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelOrderBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveOrderBtn">Save Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/orders.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/payments.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/courier.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>
